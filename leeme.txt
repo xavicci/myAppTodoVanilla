@@ -1,0 +1,40 @@
+
+> mydayapp-js@1.0.0 dev
+> webpack-dev-server --mode development --open
+
+asset [1m[32mmain.bundle.js[39m[22m 286 KiB [1m[32m[emitted][39m[22m (name: main)
+asset [1m[32mindex.html[39m[22m 14.2 KiB [1m[32m[emitted][39m[22m
+runtime modules 27.4 KiB 13 modules
+modules by path [1m./node_modules/[39m[22m 166 KiB 31 modules
+modules by path [1m./src/[39m[22m 16.7 KiB
+  modules by path [1m./src/css/*.css[39m[22m 11.6 KiB
+    [1m./src/css/base.css[39m[22m 2.27 KiB [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+    ./node_modules/css-loader/dist/cjs.js![1m./src/css/base.css[39m[22m 9.31 KiB [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+  modules by path [1m./src/js/*.js[39m[22m 4.93 KiB
+    [1m./src/js/utils.js[39m[22m 4.7 KiB [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+    [1m./src/js/nodes.js[39m[22m 231 bytes [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+  [1m./src/index.js[39m[22m 207 bytes [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+asset modules 620 bytes
+  [1mdata:image/svg+xml;utf8,%3Csvg%20xmlns%3..[39m[22m 268 bytes [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+  [1mdata:image/svg+xml;utf8,%3Csvg%20xmlns%3..[39m[22m 352 bytes [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+webpack 5.73.0 compiled [1m[32msuccessfully[39m[22m in 3473 ms
+assets by path [1m[32m*.js[39m[22m 287 KiB
+  asset [1m[32mmain.bundle.js[39m[22m 286 KiB [1m[32m[emitted][39m[22m (name: main)
+  asset [1m[32mmain.520f1493c35fa824e89d.hot-update.js[39m[22m 854 bytes [1m[32m[emitted][39m[22m [1m[32m[immutable][39m[22m [1m[32m[hmr][39m[22m (name: main)
+asset [1m[32mindex.html[39m[22m 14.2 KiB [1m[32m[emitted][39m[22m
+asset [1m[32mmain.520f1493c35fa824e89d.hot-update.json[39m[22m 28 bytes [1m[32m[emitted][39m[22m [1m[32m[immutable][39m[22m [1m[32m[hmr][39m[22m
+Entrypoint [1mmain[39m[22m 287 KiB = [1m[32mmain.bundle.js[39m[22m 286 KiB [1m[32mmain.520f1493c35fa824e89d.hot-update.js[39m[22m 854 bytes
+cached modules 183 KiB [1m[32m[cached][39m[22m 37 modules
+runtime modules 27.4 KiB 13 modules
+[1m./src/index.js[39m[22m 207 bytes [1m[33m[built][39m[22m
+webpack 5.73.0 compiled [1m[32msuccessfully[39m[22m in 84 ms
+assets by status 286 KiB [1m[32m[cached][39m[22m 1 asset
+asset [1m[32mindex.html[39m[22m 14.2 KiB [1m[32m[emitted][39m[22m
+cached modules 183 KiB (javascript) 27.4 KiB (runtime) [1m[32m[cached][39m[22m 50 modules
+[1m./src/index.js[39m[22m 207 bytes [1m[33m[built][39m[22m
+webpack 5.73.0 compiled [1m[32msuccessfully[39m[22m in 50 ms
+assets by status 286 KiB [1m[32m[cached][39m[22m 1 asset
+asset [1m[32mindex.html[39m[22m 14.2 KiB [1m[32m[emitted][39m[22m
+cached modules 179 KiB (javascript) 27.4 KiB (runtime) [1m[32m[cached][39m[22m 50 modules
+[1m./src/js/utils.js[39m[22m 4.7 KiB [1m[33m[built][39m[22m
+webpack 5.73.0 compiled [1m[32msuccessfully[39m[22m in 197 ms

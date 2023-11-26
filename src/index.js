@@ -1,5 +1,9 @@
 import "./css/base.css";
 
-import { sayHello } from "./js/utils";
+import { refreshList, addTodoItems, loadState } from "./js/utils";
+import { newTodo, nodeLabel, todoList } from "./js/nodes";
 
-console.log(sayHello("Hello"));
+loadState();
+refreshList();
+newTodo.addEventListener('change', addTodoItems);
+
