@@ -1,12 +1,12 @@
-import { todoList, nodeFooter, nodeMain, nodeTypeTodo } from "./nodes";
+import { todoList, nodeFooter, nodeMain, nodeTypeTodo, newTodo } from "./nodes";
 
-const test = [
-  [{ id: "1", title: "titulo1", completed: true }],
-  [{ id: "2", title: "titulo2", completed: true }],
-  [{ id: "3", title: "titulo3", completed: false }],
-];
+// const test = [
+//   [{ id: "1", title: "titulo1", completed: true }],
+//   [{ id: "2", title: "titulo2", completed: true }],
+//   [{ id: "3", title: "titulo3", completed: false }],
+// ];
 
-localStorage.setItem('mydayapp-js', JSON.stringify(test));
+// localStorage.setItem('mydayapp-js', JSON.stringify(test));
 export function loadState(display = false) {
   const initialState = JSON.parse(localStorage.getItem("mydayapp-js")) || [];
 
@@ -100,14 +100,17 @@ export const editingItem = (event) => {
 
   if (event.target.nodeName === "LABEL" && isNotNodeCompleted) {
     nodeList.classList.add('editing');
-    nodeTypeTodo.classList.add('hidden');
     nodeFooter.classList.add('hidden');
+    const nodeInput = nodeList.lastElementChild;
+    nodeInput.focus();
+    console.log(nodeInput.value)
 
   }
 }
 
+
+
 export const refreshList = () => {
-  console.log("XXX")
 
   todoList.innerHTML = '';
 
@@ -145,7 +148,7 @@ export const refreshList = () => {
   });
 
   todoList.append(...listTask);
-  todoList.addEventListener('click', editingItem);
+  todoList.addEventListener('dblclick', editingItem);
   todoList.addEventListener('click', removeTodoItem);
   todoList.addEventListener('click', toogleCompletedItem);
 
