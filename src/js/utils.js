@@ -93,6 +93,31 @@ export const toogleCompletedItem = (event) => {
 
 }
 
+const updateTask = (nodeList, nodeFooter, taskId) => {
+  return function () {
+    if (event.keyCode === 13) {
+      const newInput = (event.target.value).trim();
+      const getLocalStorage = JSON.parse(localStorage.getItem("mydayapp-js")).map((value) => {
+        const item = value[0];
+        if (item.id == taskId && newInput.length > 0) {
+          item.title = newInput;
+        }
+        return value;
+      });
+
+      localStorage.setItem('mydayapp-js', JSON.stringify(getLocalStorage));
+      nodeList.classList.remove('editing');
+      nodeFooter.classList.remove('hidden');
+      refreshList();
+
+    }
+    if (event.keyCode === 27) {
+      nodeList.classList.remove('editing');
+      nodeFooter.classList.remove('hidden');
+    }
+  }
+};
+
 export const editingItem = (event) => {
 
   const nodeList = event.target.parentNode.parentNode;
@@ -103,12 +128,10 @@ export const editingItem = (event) => {
     nodeFooter.classList.add('hidden');
     const nodeInput = nodeList.lastElementChild;
     nodeInput.focus();
-    console.log(nodeInput.value)
-
+    const taskId = event.target.nextSibling.dataset.id;
+    nodeInput.addEventListener('keydown', updateTask(nodeList, nodeFooter, taskId));
   }
 }
-
-
 
 export const refreshList = () => {
 
