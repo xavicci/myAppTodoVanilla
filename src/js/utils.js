@@ -47,7 +47,7 @@ export const addTodoItems = (event) => {
   }
 }
 
-export const removeTodoItem = (event) => {
+const removeTodoItem = (event) => {
 
   if (event.target.nodeName === 'BUTTON') {
     const taskId = event.target.dataset.id;
@@ -60,8 +60,7 @@ export const removeTodoItem = (event) => {
 
 };
 
-
-export const toogleCompletedItem = (event) => {
+const toogleCompletedItem = (event) => {
 
   const isInputCheck = event.target.classList.contains('toggle');
 
@@ -105,7 +104,7 @@ const updateTask = (nodeList, nodeFooter, taskId) => {
   }
 };
 
-export const editingItem = (event) => {
+const editingItem = (event) => {
 
   const nodeList = event.target.parentNode.parentNode;
   const isNotNodeCompleted = !nodeList.classList.contains('completed');
@@ -127,7 +126,6 @@ const TodoCount = (count = 0) => {
     nodeTodoCount.innerHTML = `<strong>${count}</strong> items left`
   }
 }
-
 
 const clearCompletedBtn = () => {
 

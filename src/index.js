@@ -1,7 +1,7 @@
 import "./css/base.css";
 
 import { refreshList, addTodoItems, loadState, selectFilter } from "./js/utils";
-import { newTodo, nodeFilters } from "./js/nodes";
+import { newTodo } from "./js/nodes";
 
 loadState();
 refreshList();
