@@ -6,5 +6,5 @@ import { newTodo, nodeFilters } from "./js/nodes";
 loadState();
 refreshList();
 newTodo.addEventListener('change', addTodoItems);
-// window.addEventListener('hashchange', selectFilter, false);
+window.addEventListener('hashchange', selectFilter, false);
 

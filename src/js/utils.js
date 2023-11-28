@@ -1,15 +1,5 @@
 import { todoList, nodeFooter, nodeMain, nodeTodoCount, completeButton, nodeFilters } from "./nodes";
 
-// const test = [
-//   { id: "1", title: "titulo1", completed: true },
-//   { id: "2", title: "titulo2", completed: true },
-//   { id: "3", title: "titulo3", completed: false },
-// ];
-
-// localStorage.setItem('mydayapp-js', JSON.stringify(test));
-
-
-
 export function loadState(display = false) {
   const initialState = JSON.parse(localStorage.getItem("mydayapp-js")) || [];
 
@@ -52,8 +42,8 @@ export const addTodoItems = (event) => {
     getLocalStorage.push(createItem);
     localStorage.setItem('mydayapp-js', JSON.stringify(getLocalStorage));
     loadState(true);
-    // location.hash = "";
     refreshList();
+    location.hash = "";
   }
 }
 
@@ -86,11 +76,9 @@ export const toogleCompletedItem = (event) => {
     });
 
     localStorage.setItem('mydayapp-js', JSON.stringify(getLocalStorage));
-
     refreshList();
-
+    location.hash = '#/';
   }
-
 }
 
 const updateTask = (nodeList, nodeFooter, taskId) => {
@@ -145,40 +133,54 @@ const clearCompletedBtn = () => {
 
   const getLocalStorage = JSON.parse(localStorage.getItem("mydayapp-js")).filter((item) => !item.completed);
   localStorage.setItem('mydayapp-js', JSON.stringify(getLocalStorage));
+  location.hash = '#/';
   refreshList();
+  highlightFilter();
 
 }
 
+function highlightFilter() {
+
+  for (const child of nodeFilters.children) {
+    const href = child.firstElementChild.getAttribute('href');
+    if (location.hash == href) {
+      child.firstElementChild.classList.add('selected');
+    } else {
+      child.firstElementChild.classList.remove('selected');
+    }
+  }
+}
 
 export const selectFilter = () => {
 
   if (location.hash == '#/') {
+    highlightFilter();
     refreshList();
   } else if (location.hash == '#/pending') {
+    highlightFilter();
+    const getLocalStorage = JSON.parse(localStorage.getItem("mydayapp-js")) || [];
     const pendingFilterStorage = JSON.parse(localStorage.getItem("mydayapp-js")).filter(item => !item.completed) || [];
-    refreshList(pendingFilterStorage);
+    localStorage.setItem('mydayapp-js', JSON.stringify(pendingFilterStorage));
+    refreshList();
+    localStorage.setItem('mydayapp-js', JSON.stringify(getLocalStorage));
 
   } else if (location.hash == '#/completed') {
+    highlightFilter();
+    const getLocalStorage = JSON.parse(localStorage.getItem("mydayapp-js")) || [];
     const completeFilterStorage = JSON.parse(localStorage.getItem("mydayapp-js")).filter(item => item.completed) || [];
-    refreshList(completeFilterStorage);
-
-  } else {
+    localStorage.setItem('mydayapp-js', JSON.stringify(completeFilterStorage));
     refreshList();
+    localStorage.setItem('mydayapp-js', JSON.stringify(getLocalStorage));
+
   }
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
 }
 
-export const refreshList = (Storage = []) => {
+export const refreshList = () => {
 
   todoList.innerHTML = '';
-  // let getLocalStorage;
 
-  // if (Storage.length > 1) {
-  //   getLocalStorage = [...Storage];
-  // } else {
-  //   getLocalStorage = JSON.parse(localStorage.getItem("mydayapp-js"));
-  // }
   const getLocalStorage = JSON.parse(localStorage.getItem("mydayapp-js")) || [];
 
   const listTask = getLocalStorage.map(item => {
