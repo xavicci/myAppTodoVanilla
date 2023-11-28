@@ -7,6 +7,9 @@ import { todoList, nodeFooter, nodeMain, nodeTodoCount, completeButton, nodeFilt
 // ];
 
 // localStorage.setItem('mydayapp-js', JSON.stringify(test));
+
+
+
 export function loadState(display = false) {
   const initialState = JSON.parse(localStorage.getItem("mydayapp-js")) || [];
 
@@ -49,6 +52,7 @@ export const addTodoItems = (event) => {
     getLocalStorage.push(createItem);
     localStorage.setItem('mydayapp-js', JSON.stringify(getLocalStorage));
     loadState(true);
+    // location.hash = "";
     refreshList();
   }
 }
@@ -85,9 +89,7 @@ export const toogleCompletedItem = (event) => {
 
     refreshList();
 
-
   }
-
 
 }
 
@@ -143,31 +145,40 @@ const clearCompletedBtn = () => {
 
   const getLocalStorage = JSON.parse(localStorage.getItem("mydayapp-js")).filter((item) => !item.completed);
   localStorage.setItem('mydayapp-js', JSON.stringify(getLocalStorage));
-  console.log(getLocalStorage);
   refreshList();
 
 }
 
 
-export const selectFilter = (event) => {
+export const selectFilter = () => {
 
-  if (event.target.nodeName === "A") {
+  if (location.hash == '#/') {
+    refreshList();
+  } else if (location.hash == '#/pending') {
+    const pendingFilterStorage = JSON.parse(localStorage.getItem("mydayapp-js")).filter(item => !item.completed) || [];
+    refreshList(pendingFilterStorage);
 
-    console.log(event.target.getAttribute('href'));
-    /* nodeList.classList.add('editing');
-    nodeFooter.classList.add('hidden');
-    const nodeInput = nodeList.lastElementChild;
-    nodeInput.focus();
-    const taskId = event.target.nextSibling.dataset.id;
-    nodeInput.addEventListener('keydown', updateTask(nodeList, nodeFooter, taskId)); */
+  } else if (location.hash == '#/completed') {
+    const completeFilterStorage = JSON.parse(localStorage.getItem("mydayapp-js")).filter(item => item.completed) || [];
+    refreshList(completeFilterStorage);
+
+  } else {
+    refreshList();
   }
-
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
 }
 
-export const refreshList = () => {
+export const refreshList = (Storage = []) => {
 
   todoList.innerHTML = '';
+  // let getLocalStorage;
 
+  // if (Storage.length > 1) {
+  //   getLocalStorage = [...Storage];
+  // } else {
+  //   getLocalStorage = JSON.parse(localStorage.getItem("mydayapp-js"));
+  // }
   const getLocalStorage = JSON.parse(localStorage.getItem("mydayapp-js")) || [];
 
   const listTask = getLocalStorage.map(item => {
