@@ -1,9 +1,9 @@
-import { todoList, nodeFooter, nodeMain, nodeTypeTodo, newTodo } from "./nodes";
+import { todoList, nodeFooter, nodeMain, nodeTodoCount, completeButton } from "./nodes";
 
 // const test = [
-//   [{ id: "1", title: "titulo1", completed: true }],
-//   [{ id: "2", title: "titulo2", completed: true }],
-//   [{ id: "3", title: "titulo3", completed: false }],
+//   { id: "1", title: "titulo1", completed: true },
+//   { id: "2", title: "titulo2", completed: true },
+//   { id: "3", title: "titulo3", completed: false },
 // ];
 
 // localStorage.setItem('mydayapp-js', JSON.stringify(test));
@@ -37,15 +37,13 @@ export const addTodoItems = (event) => {
 
     const idItem = createId(inputTask);
 
-    const createItem = [
-      {
-        id: idItem,
-        title: inputTask,
-        completed: false,
-        editing: false,
-      }
-    ];
-    ;
+    const createItem = {
+      id: idItem,
+      title: inputTask,
+      completed: false,
+    }
+
+      ;
     event.target.value = "";
     const getLocalStorage = JSON.parse(localStorage.getItem("mydayapp-js")) || [];
     getLocalStorage.push(createItem);
@@ -59,7 +57,7 @@ export const removeTodoItem = (event) => {
 
   if (event.target.nodeName === 'BUTTON') {
     const taskId = event.target.dataset.id;
-    const getLocalStorage = JSON.parse(localStorage.getItem("mydayapp-js")).filter(item => item[0].id != taskId);
+    const getLocalStorage = JSON.parse(localStorage.getItem("mydayapp-js")).filter(item => item.id != taskId);
     localStorage.setItem('mydayapp-js', JSON.stringify(getLocalStorage));
 
     loadState(false);
@@ -76,12 +74,11 @@ export const toogleCompletedItem = (event) => {
   if (event.target.nodeName === 'INPUT' && isInputCheck) {
     const taskId = event.target.nextSibling.nextSibling.dataset.id;
 
-    const getLocalStorage = JSON.parse(localStorage.getItem("mydayapp-js")).map((value) => {
-      const item = value[0];
+    const getLocalStorage = JSON.parse(localStorage.getItem("mydayapp-js")).map((item) => {
       if (item.id == taskId) {
         item.completed = !item.completed;
       }
-      return value;
+      return item;
     });
 
     localStorage.setItem('mydayapp-js', JSON.stringify(getLocalStorage));
@@ -91,18 +88,18 @@ export const toogleCompletedItem = (event) => {
 
   }
 
+
 }
 
 const updateTask = (nodeList, nodeFooter, taskId) => {
   return function () {
     if (event.keyCode === 13) {
       const newInput = (event.target.value).trim();
-      const getLocalStorage = JSON.parse(localStorage.getItem("mydayapp-js")).map((value) => {
-        const item = value[0];
+      const getLocalStorage = JSON.parse(localStorage.getItem("mydayapp-js")).map((item) => {
         if (item.id == taskId && newInput.length > 0) {
           item.title = newInput;
         }
-        return value;
+        return item;
       });
 
       localStorage.setItem('mydayapp-js', JSON.stringify(getLocalStorage));
@@ -133,14 +130,31 @@ export const editingItem = (event) => {
   }
 }
 
+const TodoCount = (count = 0) => {
+  if (count == 1) {
+    nodeTodoCount.innerHTML = `<strong>${count}</strong> item left`
+  } else {
+    nodeTodoCount.innerHTML = `<strong>${count}</strong> items left`
+  }
+}
+
+
+const clearCompletedBtn = () => {
+
+  const getLocalStorage = JSON.parse(localStorage.getItem("mydayapp-js")).filter((item) => !item.completed);
+  localStorage.setItem('mydayapp-js', JSON.stringify(getLocalStorage));
+  console.log(getLocalStorage);
+  refreshList();
+
+}
+
 export const refreshList = () => {
 
   todoList.innerHTML = '';
 
   const getLocalStorage = JSON.parse(localStorage.getItem("mydayapp-js")) || [];
 
-  const listTask = getLocalStorage.map(value => {
-    const item = value[0];
+  const listTask = getLocalStorage.map(item => {
     const nodeLi = document.createElement('li');
     const nodeDiv = document.createElement('DIV');
     nodeDiv.classList.add('view');
@@ -164,7 +178,6 @@ export const refreshList = () => {
     }
     if (item.editing) {
       nodeLi.classList.add('editing');
-
     }
 
     return nodeLi;
@@ -174,5 +187,13 @@ export const refreshList = () => {
   todoList.addEventListener('dblclick', editingItem);
   todoList.addEventListener('click', removeTodoItem);
   todoList.addEventListener('click', toogleCompletedItem);
+  completeButton.addEventListener('click', clearCompletedBtn)
 
+  const pendingFilter = listTask.filter(item => !item.classList.contains('completed'));
+  const valuePending = pendingFilter.length;
+
+  const anyComplete = listTask.find(item => item.classList.contains('completed'));
+  anyComplete ? completeButton.classList.remove('hidden') : completeButton.classList.add('hidden');
+
+  TodoCount(valuePending);
 }
