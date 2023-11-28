@@ -177,9 +177,9 @@ Una tarea debería tener 3 posibles interacciones:
 
 Deben existir tres filtros que funcione desde la URL y funcionan como links en el footer:
 
-- `#/all`: Muestra todas las tareas tanto las que están en estado de **completed** y **pending**.
-- `#/pending`: Muestra todas las tareas en estado **pending**.
-- `#/completed`: Muestra todas las tareas en estado **completed**.
+- `#/all`            : Muestra todas las tareas tanto las que están en estado de **completed** y **pending**.
+- `#/pending`        : Muestra todas las tareas en estado **pending**.
+- `#/completed`      : Muestra todas las tareas en estado **completed**.
 
 ### 9. Deployment
 

@@ -1,4 +1,4 @@
-import { todoList, nodeFooter, nodeMain, nodeTodoCount, completeButton } from "./nodes";
+import { todoList, nodeFooter, nodeMain, nodeTodoCount, completeButton, nodeFilters } from "./nodes";
 
 // const test = [
 //   { id: "1", title: "titulo1", completed: true },
@@ -148,6 +148,22 @@ const clearCompletedBtn = () => {
 
 }
 
+
+export const selectFilter = (event) => {
+
+  if (event.target.nodeName === "A") {
+
+    console.log(event.target.getAttribute('href'));
+    /* nodeList.classList.add('editing');
+    nodeFooter.classList.add('hidden');
+    const nodeInput = nodeList.lastElementChild;
+    nodeInput.focus();
+    const taskId = event.target.nextSibling.dataset.id;
+    nodeInput.addEventListener('keydown', updateTask(nodeList, nodeFooter, taskId)); */
+  }
+
+}
+
 export const refreshList = () => {
 
   todoList.innerHTML = '';
@@ -187,7 +203,7 @@ export const refreshList = () => {
   todoList.addEventListener('dblclick', editingItem);
   todoList.addEventListener('click', removeTodoItem);
   todoList.addEventListener('click', toogleCompletedItem);
-  completeButton.addEventListener('click', clearCompletedBtn)
+  completeButton.addEventListener('click', clearCompletedBtn);
 
   const pendingFilter = listTask.filter(item => !item.classList.contains('completed'));
   const valuePending = pendingFilter.length;
