@@ -20,6 +20,7 @@ const createId = (string) => {
   }
 
   return code.toString();
+  //clg
 }
 
 export const addTodoItems = (event) => {
